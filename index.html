@@ -84,6 +84,8 @@ String good = "string object";
 
         </p>
         <pre>
+
+            
 long startTime = System.currentTimeMillis();
 
 long estimatedTime = System.currentTimeMillis() - startTime;
@@ -100,44 +102,36 @@ long estimatedTime = System.nanoTime() - startTime;
 
 
         <div class="page-header">
-            <h2>(1️) JavaScript Clean Code 🛠</h2>
+            <h2>JavaScript Clean Code 🛠</h2>
         </div>
-
-
 
 
         <p>Use meaningful and pronounceable variable names 💡</p>
         
         <pre>
-//Bad :
+<b>Bad : </b>
 const yyyymmdstr = moment().format('YYYY/MM/DD');
 
-//Good :
+<b>Good : </b> 
 const currentDate = moment().format('YYYY/MM/DD');
         </pre>
 
-
-
-
-
-        <div class="page-header">
-            <h2>(2️) JavaScript Clean Code 🛠</h2>
-        </div>
-
-
-
+        
 
         <p>Use default arguments instead of short circuiting or conditionals 💡</p>
         
         <pre>
-//Bad :
+<b>Bad :</b>
+
 function createMicrobrewery(name) 
 {
   const breweryName = name || 'Hipster Brew Co.';
   // ...
 }
+<b>
+Good :
+</b>
 
-//Good :
 function createMicrobrewery(breweryName = 'Hipster Brew Co.') 
 {    
   // ...
@@ -146,6 +140,76 @@ function createMicrobrewery(breweryName = 'Hipster Brew Co.')
 
         </pre>
 
+        <p>
+            Use explanatory variables 💡
+
+        </p>
+
+        <pre>
+<b>Bad :
+</b>
+
+const address = 'One Infinite Loop, Cupertino 95014';
+            
+const cityZipCodeRegex = /^[^,\\]+[,\\\s]+(.+?)\s*(\d{5})?$/;
+            
+saveCityZipCode(address.match(cityZipCodeRegex)[1], address.match(cityZipCodeRegex)[2]);
+            
+<b>Good :</b>
+const address = 'One Infinite Loop, Cupertino 95014';
+            
+const cityZipCodeRegex = /^[^,\\]+[,\\\s]+(.+?)\s*(\d{5})?$/;
+            
+const [, city, zipCode] = address.match(cityZipCodeRegex) || [];
+            
+saveCityZipCode(city, zipCode);            
+
+        </pre>
+
+
+        <p>We will read more code than we will ever write. It's important that the code we do write is readable and searchable.💡</p>
+        <pre>
+<b>Bad :</b>
+// What the heck is 86400000 for?
+setTimeout(blastOff, 86400000);
+
+<b>Good :</b>            
+// Declare them as capitalized `const` globals.
+const MILLISECONDS_IN_A_DAY = 86400000;
+            
+setTimeout(blastOff, MILLISECONDS_IN_A_DAY);
+        </pre>
+
+<p>    Don't add unneeded context 💡</p>
+
+<p>If your class/object name tells you something, don't repeat that in your variable name</p>
+<pre>
+<b>Bad : </b>
+const Car =
+ {
+carMake: 'Honda',
+carModel: 'Accord',
+carColor: 'Blue'         
+ };
+    
+function paintCar(car) 
+{
+car.carColor = 'Red';
+}
+    
+<b>Good :</b>
+const Car = {
+make: 'Honda',
+model: 'Accord',
+color: 'Blue'
+    };
+    
+function paintCar(car) {
+car.color = 'Red';
+    }
+    
+
+</pre>
 
 
 
